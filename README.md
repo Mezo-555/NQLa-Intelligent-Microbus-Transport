@@ -6,7 +6,7 @@ An AI-powered, interactive multi-agent courtroom simulator designed for law stud
 
 Legal education traditionally relies on moot court exercises and role-play to train students, which are effective but highly resource-intensive and difficult to scale. This system provides a repeatable, low-stakes environment where students can actively participate in simulated trial stages.
 
-The platform models the core participants of a trial—a judge, prosecution, defense, and a witness—as distinct autonomous AI agents that interact with each other and the student in real time. A major technical focus of the project is solving a regional NLP challenge: managing the linguistic shift between formal legal Arabic (الفصحى القانونية) for attorneys and judges, and colloquial Egyptian Arabic for lay witnesses.
+The platform models the core participants of a trial:a judge, prosecution, defense, and a witness—as distinct autonomous AI agents that interact with each other and the student in real time. A major technical focus of the project is solving a regional NLP challenge: managing the linguistic shift between formal legal Arabic (الفصحى القانونية) for attorneys and judges, and colloquial Egyptian Arabic for lay witnesses.
 
 ## ✨ Key Features
 
