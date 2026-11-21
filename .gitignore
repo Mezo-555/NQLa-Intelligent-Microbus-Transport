@@ -1,6 +1,33 @@
+# Python
 __pycache__/
 *.pyc
+*.pyo
 venv/
 .venv/
+*.egg-info/
+
+# Environment variables
 .env
+.env.local
+.env.*.local
+
+# Logs
 *.log
+
+# Frontend / Node
+node_modules/
+dist/
+.next/
+out/
+build/
+
+# Vercel
+.vercel/
+
+# Flutter build outputs
+apps/mobile-app/build/
+apps/admin-dashboard/build/
+
+# OS
+.DS_Store
+Thumbs.db

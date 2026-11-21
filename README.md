@@ -129,8 +129,9 @@ A backlog item is considered **Done** only when:
 ```text
 nqla-platform/
 ├── apps/
-│   ├── mobile_app/          # Track 1: Flutter Passenger & Driver App
-│   └── admin_dashboard/     # Track 1: Flutter Web / Admin Interface
+│   ├── mobile-app/          # Track 1: Flutter Passenger & Driver App
+│   ├── website/             # Track 1: Public Website (nq8la.tech)
+│   └── admin-dashboard/     # Track 1: Flutter Web / Admin Interface
 ├── backend/
 │   ├── app/                 # Track 2: FastAPI routers, WebSockets, Matching Engine
 │   ├── db/                  # Track 2: PostGIS migrations & Alexandria route seed data
