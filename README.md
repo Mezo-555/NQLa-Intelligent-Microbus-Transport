@@ -36,8 +36,8 @@ All technologies are selected to ensure **zero licensing or hardware costs** (`B
 ## 🎯 3. Scope & Business Requirements Traceability
 
 ### Scope Boundaries (Release 1.0)
-- ✅ **In Scope:** Alexandria routes/stops, Passenger/Driver/Admin UIs, Transportation AI Agent, Ride Matching, Demand Forecasting & Incentives, Egyptian/Franco-Arabic Feedback & Safety Scoring.
-- ❌ **Out of Scope:** Operations outside Alexandria, online payment/fare settlement, dedicated in-vehicle hardware, external transit authority integration.
+- ✅ **In Scope:** Alexandria routes/stops, Passenger/Driver/Admin UIs, Transportation AI Agent, Ride Matching, Demand Forecasting & Incentives, Egyptian/Franco-Arabic Feedback & Safety Scoring, upfront fare transparency, and a simulated closed-loop rider/driver wallet prototype (with QR boarding check-in and spoken payment confirmation).
+- ❌ **Out of Scope:** Operations outside Alexandria, live bank/card payment gateway & Fawry cash-out settlement (real money custody), dedicated in-vehicle hardware, external transit authority integration.
 
 ### Business Requirements (`BR`) Matrix
 
@@ -99,8 +99,8 @@ Work is organized into **4 sequential increments**, executed via **2-week Scrum 
 
 | Increment | Theme | Track 1 (Flutter / UI) | Track 2 (FastAPI / PostGIS) | Track 3 (Demand ML & Safety) | Track 4 (Arabic NLP & Agent) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Increment I** | **Alexandria Route & Stop Dataset** | Auth, `OpenStreetMap` view, route search UI | Clean Alexandria dataset, setup `PostGIS`, route & transfer API | Audit public mobility data; build Alexandria traffic simulator | Collect Egyptian & Franco-Arabic feedback data; preprocessing |
-| **Increment II** | **Egyptian Arabic NLP** | Feedback & rating screens, driver profile UI | Ride-matching engine (`BR-01`), live GPS WebSockets, `/feedback` API | Build & validate Driver Safety Score module (`BR-05`) | Train & wrap Sentiment/Complaint NLP models (`BR-06`) in FastAPI |
+| **Increment I** | **Alexandria Route & Stop Dataset** | `OpenStreetMap` view, route search UI, simulated wallet transfer (QR + TTS), simulated live GPS tracking (behind contract repositories) | Clean Alexandria dataset, setup `PostGIS`, route & transfer API | Audit public mobility data; build Alexandria traffic simulator | Collect Egyptian & Franco-Arabic feedback data; preprocessing |
+| **Increment II** | **Egyptian Arabic NLP** | Auth & role routing, live WebSocket GPS integration, feedback & rating screens, driver profile UI | Ride-matching engine (`BR-01`), live GPS WebSockets, `/feedback` API | Build & validate Driver Safety Score module (`BR-05`) | Train & wrap Sentiment/Complaint NLP models (`BR-06`) in FastAPI |
 | **Increment III** | **Demand Forecasting & Incentives** | Driver heatmap, incentive alerts UI, Admin Dashboard (`BR-07`) | Connect ML forecasts to DB; Admin reports & alert endpoints | Deliver Demand Forecasting (`BR-03`) & Incentive Engine (`BR-04`) | Prototype AI Agent tool-calling & verified route retrieval |
 | **Increment IV** | **Transportation AI Agent & Integration** | Embed AI Agent chat UI; end-to-end UX polish | Full-system load testing, Dockerization, final integration | Run full simulation benchmarks for thesis evaluation (`BR-01`, `BR-04`) | Connect Agent to all tools; enforce safety & human-routing guardrails |
 
