@@ -1,0 +1,5 @@
+.api-source-notice{display:flex;align-items:center;gap:7px;padding:8px 11px;margin:0 0 12px;border:1px solid #e4eaed;border-radius:9px;background:#f7f9fa;color:#73828b;font-size:9px}
+.api-source-notice>span{width:7px;height:7px;border-radius:50%;background:#9ba9ae}
+.api-source-notice.connected{border-color:#cde7dc;background:#f1faf5;color:#4a785e}
+.api-source-notice.connected>span{background:#3c9b6b;box-shadow:0 0 0 3px rgba(60,155,107,.12)}
+button:disabled{cursor:not-allowed;opacity:.56}

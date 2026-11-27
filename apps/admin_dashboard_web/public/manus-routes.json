@@ -1,0 +1,1 @@
+{"routes":[{"path":"/","title":"الرئيسية"},{"path":"/drivers","title":"السائقون"},{"path":"/passengers","title":"الركاب"},{"path":"/requests","title":"الطلبات"},{"path":"/trips","title":"الرحلات"},{"path":"/map","title":"الخريطة التشغيلية"},{"path":"/routes","title":"المسارات والمحطات"},{"path":"/reports","title":"التقارير"},{"path":"/ai-insights","title":"ذكاء التشغيل"}]}
