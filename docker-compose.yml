@@ -16,6 +16,24 @@ services:
       retries: 10
       start_period: 10s
 
+  test-db:
+    image: postgis/postgis:16-3.4
+    profiles: ["integration"]
+    environment:
+      POSTGRES_DB: nqla_test
+      POSTGRES_USER: nqla_test
+      POSTGRES_PASSWORD: nqla_test_only
+    ports:
+      - "5433:5432"
+    volumes:
+      - nqla_postgres_test_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nqla_test -d nqla_test"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
   backend:
     build:
       context: .
@@ -52,5 +70,25 @@ services:
       retries: 5
       start_period: 15s
 
+  integration-tests:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    profiles: ["integration"]
+    working_dir: /app
+    command: sh -c "alembic upgrade head && pytest -q tests/test_integration_postgis.py"
+    environment:
+      ENVIRONMENT: test
+      RUN_POSTGIS_INTEGRATION: "1"
+      DATABASE_URL: postgresql+psycopg://nqla_test:nqla_test_only@test-db:5432/nqla_test
+      JWT_SECRET_KEY: integration-test-secret-key-with-at-least-thirty-two-characters
+      DRIVER_LOCATION_MAX_AGE_SECONDS: 120
+      MATCHING_RADIUS_METERS: 5000
+      MATCHING_AVERAGE_SPEED_KMH: 20
+    depends_on:
+      test-db:
+        condition: service_healthy
+
 volumes:
   nqla_postgres_data:
+  nqla_postgres_test_data:

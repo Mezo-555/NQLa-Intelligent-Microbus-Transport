@@ -10,6 +10,8 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 
 COPY backend/app /app/app
 COPY backend/db /app/db
+COPY backend/tests /app/tests
+COPY backend/pytest.ini /app/pytest.ini
 COPY backend/alembic.ini /app/alembic.ini
 
 EXPOSE 8000

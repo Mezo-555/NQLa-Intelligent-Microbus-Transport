@@ -33,6 +33,21 @@ python -m pytest tests -q
 ruff check .
 ```
 
+## PostGIS integration tests
+
+The integration suite uses a separate PostgreSQL/PostGIS container on port `5433`; it never uses the development database. Docker must be running first.
+
+```powershell
+docker compose --profile integration up --build integration-tests
+docker compose --profile integration down
+```
+
+The integration-test container applies Alembic migrations, runs `tests/test_integration_postgis.py`, and exits. A persistent test volume is created as `nqla_postgres_test_data`; remove it only when a fully clean test database is needed:
+
+```powershell
+docker compose --profile integration down -v
+```
+
 The test suite is designed to exercise routing, scoring, geospatial calculations, schemas, and API validation without connecting to a non-test database. To run locally against PostgreSQL, set `DATABASE_URL` to a test-only PostGIS database before running database integration tests.
 
 ## API foundation
