@@ -1,0 +1,56 @@
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-nqla}
+      POSTGRES_USER: ${POSTGRES_USER:-nqla}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local_only_change_me}
+    ports:
+      - "5432:5432"
+    volumes:
+      - nqla_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    working_dir: /app
+    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    environment:
+      ENVIRONMENT: ${ENVIRONMENT:-development}
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://nqla:local_only_change_me@db:5432/nqla}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:?Create .env from .env.example and set JWT_SECRET_KEY}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES:-30}
+      DRIVER_LOCATION_MAX_AGE_SECONDS: ${DRIVER_LOCATION_MAX_AGE_SECONDS:-120}
+      MATCHING_RADIUS_METERS: ${MATCHING_RADIUS_METERS:-5000}
+      MATCHING_AVERAGE_SPEED_KMH: ${MATCHING_AVERAGE_SPEED_KMH:-20}
+      MATCHING_WEIGHTS_PROXIMITY: ${MATCHING_WEIGHTS_PROXIMITY:-0.45}
+      MATCHING_WEIGHTS_ETA: ${MATCHING_WEIGHTS_ETA:-0.25}
+      MATCHING_WEIGHTS_ROUTE_COMPATIBILITY: ${MATCHING_WEIGHTS_ROUTE_COMPATIBILITY:-0.30}
+      CORS_ORIGINS: ${CORS_ORIGINS:-*}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://localhost:8000/health').read()"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+volumes:
+  nqla_postgres_data:

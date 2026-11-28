@@ -147,3 +147,7 @@ nqla-platform/
 │   └── traceability/        # BR -> UR -> FR mapping & sprint evaluation logs
 └── docker-compose.yml       # Local multi-container orchestration
 ```
+
+### Track 2 Backend Foundation
+
+The FastAPI/PostGIS backend lives in [`backend/`](backend/README.md). Local setup, migrations, tests, endpoint contracts, and the synthetic-data limitations are documented there.
