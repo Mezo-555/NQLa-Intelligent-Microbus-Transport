@@ -1,7 +1,8 @@
-# Python
+# Python environments & packaging artifacts
 __pycache__/
 *.pyc
 *.pyo
+*.py[cod]
 venv/
 .venv/
 *.egg-info/
@@ -28,6 +29,10 @@ build/
 apps/mobile-app/build/
 apps/admin-dashboard/build/
 
-# OS
+# IDE & OS clutter
+.vscode/
 .DS_Store
 Thumbs.db
+
+# Data
+*.csv
